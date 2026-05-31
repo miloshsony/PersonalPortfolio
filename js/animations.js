@@ -12,6 +12,8 @@ class AnimationController {
         this.setupHoverAnimations();
         this.setupTypingAnimation();
         this.createParticles();
+        this.setupHeroMatrixCanvas();
+        this.setupProblemGridCanvas();
     }
     
     // Intersection Observer for scroll-based animations
@@ -315,10 +317,200 @@ class AnimationController {
         };
     }
     
+    setupHeroMatrixCanvas() {
+        const canvas = document.getElementById('hero-matrix-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        let width = canvas.offsetWidth;
+        let height = canvas.offsetHeight;
+        canvas.width = width;
+        canvas.height = height;
+        
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                width = entry.contentRect.width;
+                height = entry.contentRect.height;
+                canvas.width = width;
+                canvas.height = height;
+                initializeColumns();
+            }
+        });
+        resizeObserver.observe(canvas);
+        
+        const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ホコリコアイスウエトヌフミマヨルヲ0x01//system.init';
+        const charArr = chars.split('');
+        
+        const fontSize = 12;
+        let columns = Math.floor(width / fontSize) + 1;
+        let drops = [];
+        let speeds = [];
+        
+        function initializeColumns() {
+            columns = Math.floor(width / fontSize) + 1;
+            drops = [];
+            speeds = [];
+            for (let x = 0; x < columns; x++) {
+                drops[x] = Math.random() * -100;
+                speeds[x] = 0.4 + Math.random() * 0.8; // Faint slow drops for premium tech feel
+            }
+        }
+        
+        initializeColumns();
+        
+        let animationId;
+        const draw = () => {
+            ctx.fillStyle = 'rgba(245, 245, 247, 0.085)'; // Matches base warm gray background to clear canvas
+            ctx.fillRect(0, 0, width, height);
+            
+            ctx.fillStyle = 'rgba(113, 113, 122, 0.055)'; // Faint zinc code raindrops
+            ctx.font = fontSize + 'px "Fira Mono", monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArr[Math.floor(Math.random() * charArr.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                drops[i] += speeds[i];
+                
+                if (drops[i] * fontSize > height && Math.random() > 0.98) {
+                    drops[i] = 0;
+                }
+            }
+            animationId = requestAnimationFrame(draw);
+        };
+        
+        draw();
+        this.animations.set('matrixRain', {
+            cancel: () => {
+                cancelAnimationFrame(animationId);
+                resizeObserver.disconnect();
+            }
+        });
+    }
+
+    setupProblemGridCanvas() {
+        const canvas = document.getElementById('problem-grid-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        let width = canvas.offsetWidth;
+        let height = canvas.offsetHeight;
+        canvas.width = width;
+        canvas.height = height;
+        
+        let mouseX = -1000;
+        let mouseY = -1000;
+        
+        window.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+        
+        window.addEventListener('mouseleave', () => {
+            mouseX = -1000;
+            mouseY = -1000;
+        });
+        
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                width = entry.contentRect.width;
+                height = entry.contentRect.height;
+                canvas.width = width;
+                canvas.height = height;
+                initGrid();
+            }
+        });
+        resizeObserver.observe(canvas);
+        
+        const spacing = 45; // Pixel density spacing
+        let points = [];
+        
+        function initGrid() {
+            points = [];
+            const cols = Math.floor(width / spacing) + 2;
+            const rows = Math.floor(height / spacing) + 2;
+            
+            for (let c = 0; c < cols; c++) {
+                for (let r = 0; r < rows; r++) {
+                    const type = Math.random() > 0.88 ? 'star' : (Math.random() > 0.7 ? 'num' : 'none');
+                    points.push({
+                        x: c * spacing,
+                        y: r * spacing,
+                        baseX: c * spacing,
+                        baseY: r * spacing,
+                        type: type,
+                        val: type === 'num' ? Math.floor(Math.random() * 4) + 1 : '*',
+                        opacity: 0.08 + Math.random() * 0.35,
+                        fadeDirection: Math.random() > 0.5 ? 1 : -1,
+                        fadeSpeed: 0.0015 + Math.random() * 0.003,
+                        phase: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+        }
+        
+        initGrid();
+        
+        let animationId;
+        const render = () => {
+            ctx.clearRect(0, 0, width, height);
+            const time = Date.now() * 0.001;
+            
+            points.forEach(p => {
+                p.opacity += p.fadeSpeed * p.fadeDirection;
+                if (p.opacity > 0.45) {
+                    p.opacity = 0.45;
+                    p.fadeDirection = -1;
+                } else if (p.opacity < 0.05) {
+                    p.opacity = 0.05;
+                    p.fadeDirection = 1;
+                }
+                
+                const offsetX = Math.sin(time + p.phase) * 3;
+                const offsetY = Math.cos(time + p.phase) * 3;
+                const finalX = p.baseX + offsetX;
+                const finalY = p.baseY + offsetY;
+                
+                const dx = mouseX - finalX;
+                const dy = mouseY - finalY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                let scaleOpacity = 1;
+                if (dist < 120) {
+                    const factor = (120 - dist) / 120;
+                    scaleOpacity = 1 + factor * 1.6;
+                }
+                
+                if (p.type === 'star') {
+                    ctx.fillStyle = `rgba(234, 88, 12, ${p.opacity * scaleOpacity})`;
+                    ctx.font = '10px "Inter", sans-serif';
+                    ctx.fillText('*', finalX, finalY);
+                } else if (p.type === 'num') {
+                    ctx.fillStyle = `rgba(161, 161, 170, ${p.opacity * scaleOpacity})`;
+                    ctx.font = '9px "Fira Mono", monospace';
+                    ctx.fillText(p.val, finalX, finalY);
+                }
+            });
+            
+            animationId = requestAnimationFrame(render);
+        };
+        
+        render();
+        this.animations.set('problemGrid', {
+            cancel: () => {
+                cancelAnimationFrame(animationId);
+                resizeObserver.disconnect();
+            }
+        });
+    }
+
     // Clean up observers
     destroy() {
         this.observers.forEach(observer => observer.disconnect());
         this.observers.clear();
+        this.animations.forEach(anim => {
+            if (anim.cancel) anim.cancel();
+        });
         this.animations.clear();
     }
 }

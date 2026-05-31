@@ -11,8 +11,8 @@
     <meta property="og:url" content="https://miloshsony.vercel.app">
     <meta property="og:type" content="website">
     <title>Milosh Sony | MERN Stack & Full Stack Developer</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/styles.css?v=1.0.4">
+    <link rel="stylesheet" href="css/animations.css?v=1.0.4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -21,62 +21,35 @@
 <body class="screenshot-style-bg">
     <!-- Top Navigation -->
     <header class="screenshot-nav">
-        <div class="nav-logo">MS</div>
+        <div class="nav-logo">
+            <svg class="logo-icon" width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="25" width="50" height="50" stroke="#18181b" stroke-width="12" fill="none"/>
+                <path d="M40 50 L60 50" stroke="#18181b" stroke-width="12"/>
+            </svg>
+            <span class="logo-text">miloshsony</span>
+        </div>
         <nav>
-            <a href="#home" class="nav-link active">home</a>
-            <a href="#about" class="nav-link">about</a>
-            <a href="#work" class="nav-link">work</a>
-            <a href="#services" class="nav-link">services</a>
-            <a href="#writing" class="nav-link">writing</a>
-            <a href="#contact" class="nav-link">reach out</a>
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#achievements" class="nav-link">Achievements</a>
+            <a href="#contact" class="nav-link">Contact</a>
         </nav>
     </header>
     <main>
         <!-- Hero Section -->
         <section id="home" class="screenshot-hero">
+            <!-- Ghost Matrix Rain Canvas -->
+            <canvas id="hero-matrix-canvas"></canvas>
+            
             <div class="hero-col hero-col-left">
-                <div class="hero-mono">// system.init<br>
-                    <span class="hero-blue">2+ years</span> · <span class="hero-blue">10+ projects</span> · <span class="hero-blue">team lead</span>
-                </div>
                 <h1 class="hero-title">Hello, I'm<br><span>Milosh Sony</span></h1>
-                <div class="hero-sub">Full Stack Developer (MERN) & AI-Integrated Web Engineer</div>
-                <p class="hero-desc">I build secure, production-ready web applications with JWT authentication, RBAC, and AI-powered workflows. Let’s solve your toughest product and engineering problems together.</p>
+                <div class="hero-sub">MCA Student & Full Stack Developer — MERN Stack</div>
+                <p class="hero-desc">I build secure, production-ready web applications with JWT authentication, role-based access control, and AI-integrated workflows. Currently seeking developer roles to contribute and grow.</p>
                 <div class="hero-btns">
-                    <a href="#approach" class="btn btn-primary screenshot-btn">See my approach</a>
-                    <a href="#projects" class="btn btn-outline screenshot-btn">Case studies</a>
-                </div>
-            </div>
-            <div class="hero-col hero-col-right">
-                <!-- Placeholder for photo or illustration -->
-                <div class="hero-photo-placeholder">MS</div>
-            </div>
-        </section>
-        <!-- Problem Section -->
-        <section class="screenshot-problem">
-            <div class="problem-header">
-                <h2>The Problem</h2>
-                <p>Modern web complexity doesn’t announce itself. It piles up quietly until shipping anything feels like a fight.</p>
-            </div>
-            <div class="problem-cards">
-                <div class="problem-card" data-anim>
-                    <div class="problem-num">01</div>
-                    <div class="problem-title">Features take longer than they should</div>
-                    <div class="problem-desc">Change one thing, five other places break. What should be a half-day task turns into a multi-day ordeal, and nobody can explain why.</div>
-                </div>
-                <div class="problem-card" data-anim>
-                    <div class="problem-num">02</div>
-                    <div class="problem-title">New engineers take months to contribute</div>
-                    <div class="problem-desc">Knowledge lives in people’s heads. Conventions are undocumented. Onboarding is ad-hoc.</div>
-                </div>
-                <div class="problem-card" data-anim>
-                    <div class="problem-num">03</div>
-                    <div class="problem-title">Design and engineering are misaligned</div>
-                    <div class="problem-desc">No shared language, no design system governance, constant rework and miscommunication.</div>
-                </div>
-                <div class="problem-card" data-anim>
-                    <div class="problem-num">04</div>
-                    <div class="problem-title">Performance degrades with every release</div>
-                    <div class="problem-desc">The app gets heavier with every deploy. Pages that loaded in 2 seconds now take 5. Your users noticed before your team did.</div>
+                    <a href="#projects" class="btn btn-primary screenshot-btn">View Projects</a>
+                    <a href="assets/MiloshSonyResume.pdf" target="_blank" class="btn btn-outline screenshot-btn">Download Resume</a>
                 </div>
             </div>
         </section>
@@ -109,12 +82,12 @@
                     <div class="timeline-item">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
-                            <div class="timeline-date">May 2025 – June 2025</div>
+                            <div class="timeline-date">June 2025 (1 Month)</div>
                             <h3 class="timeline-title">UI/UX Design Intern</h3>
                             <h4 class="timeline-company">Srishti Innovative, Technopark, Trivandrum, Kerala</h4>
                             <ul class="timeline-highlights">
                                 <li>Designed wireframes and interactive prototypes for web and mobile applications using Figma, reducing design iteration cycles through early stakeholder feedback.</li>
-                                <li>Conducted usability analysis and worked with developers to translate designs into implementation-ready specifications, ensuring on-time delivery across 3 product modules.</li>
+                                <li>Conducted usability analysis and collaborated with developers to translate designs into implementation-ready specifications, ensuring on-time delivery across 3 product modules.</li>
                             </ul>
                         </div>
                     </div>
@@ -123,34 +96,87 @@
         </section>
         <!-- Projects Section -->
         <section id="projects" class="projects card-section">
-            <div class="card">
+            <div class="card projects-container">
                 <h2>Projects</h2>
-                <div class="projects-grid animated-cards">
-                    <div class="project-card">
-                        <h3>AI Resume Analyzer</h3>
-                        <p>An AI-powered resume analysis tool that evaluates uploaded PDF resumes using Google Gemini API. Returns ATS score, strengths, weaknesses, missing keywords, and actionable feedback.</p>
-                        <ul><li>JWT authentication with role-based access control (user and admin roles)</li><li>PDF upload and text extraction using Multer and pdf-parse</li><li>Google Gemini API integration with structured JSON response handling</li><li>Analysis history dashboard saved to MongoDB</li><li>Admin panel to view all users and their analyses</li></ul>
-                        <div class="project-links">
-                            <a href="https://github.com/miloshsony/resume-analyzer" target="_blank">GitHub</a>
-                            <a href="https://resume-analyzer.vercel.app" target="_blank">Live</a>
+                <div class="new-projects-grid">
+                    <!-- Project 1 -->
+                    <div class="new-project-card">
+                        <div class="proj-card-top">
+                            <span class="proj-num">01 / 03</span>
+                            <span class="proj-badge badge-purple">AI Powered</span>
+                        </div>
+                        <h3 class="proj-title">AI Resume Analyzer</h3>
+                        <p class="proj-desc">Evaluates uploaded PDF resumes using Google Gemini API — returns ATS score, strengths, weaknesses, and missing keywords.</p>
+                        <div class="proj-tags">
+                            <span class="proj-tag tag-blue">React.js</span>
+                            <span class="proj-tag tag-blue">Node.js</span>
+                            <span class="proj-tag">MongoDB</span>
+                            <span class="proj-tag">Gemini API</span>
+                            <span class="proj-tag">JWT + RBAC</span>
+                        </div>
+                        <hr class="proj-divider">
+                        <ul class="proj-features">
+                            <li>Role-based access — user and admin dashboards</li>
+                            <li>PDF extraction via Multer and pdf-parse</li>
+                            <li>Analysis history saved to MongoDB</li>
+                        </ul>
+                        <div class="proj-btns">
+                            <a href="https://resume-analyzer.vercel.app" target="_blank" class="btn-proj btn-proj-primary">Live Demo</a>
+                            <a href="https://github.com/miloshsony/resume-analyzer" target="_blank" class="btn-proj btn-proj-outline">GitHub</a>
                         </div>
                     </div>
-                    <div class="project-card">
-                        <h3>Waste Stream Visual Auditor</h3>
-                        <p>A community waste reporting platform with geolocation-based report submission, real-time analytics dashboard, and multi-role access control.</p>
-                        <ul><li>JWT authentication with RBAC (admin, reporter, viewer roles)</li><li>8+ REST API endpoints for geolocation-based waste reporting</li><li>Real-time analytics dashboard showing regional waste trends</li><li>Role-based dashboards for report review and approval workflow</li><li>Built with AI-assisted development using Antigravity and Claude</li></ul>
-                        <div class="project-links">
-                            <a href="https://github.com/miloshsony/waste-stream-auditor" target="_blank">GitHub</a>
-                            <a href="https://waste-stream-auditor.vercel.app" target="_blank">Live</a>
+
+                    <!-- Project 2 -->
+                    <div class="new-project-card">
+                        <div class="proj-card-top">
+                            <span class="proj-num">02 / 03</span>
+                            <span class="proj-badge badge-amber">MCA Main Project</span>
                         </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>College Facilities Management System</h3>
-                        <p>A web application for booking and managing college facilities including labs, auditoriums, and sports courts, with admin approval workflows.</p>
-                        <ul><li>Session-based authentication with role-separated dashboards</li><li>Full CRUD booking system with admin approval workflow</li><li>Prevents double-booking conflicts automatically</li><li>Research published in International Journal of Engineering Science Technologies (ISSN: 2456-8651), Vol. 10, No. 1, Feb 2026</li></ul>
-                        <div class="project-links">
-                            <a href="https://github.com/miloshsony/college-facilities" target="_blank">GitHub</a>
-                            <a href="https://college-facilities.onrender.com" target="_blank">Live</a>
+                        <h3 class="proj-title">Waste Stream Visual Auditor</h3>
+                        <p class="proj-desc">An AI-powered waste management platform that enables citizens to report waste using photos and GPS location. TensorFlow.js classifies waste types automatically, while role-based workflows route reports from submission to clearance.</p>
+                        <div class="proj-tags">
+                            <span class="proj-tag tag-blue">React 19</span>
+                            <span class="proj-tag tag-blue">Node.js</span>
+                            <span class="proj-tag">MongoDB</span>
+                            <span class="proj-tag">TensorFlow.js</span>
+                            <span class="proj-tag">Teachable Machine</span>
+                            <span class="proj-tag">JWT + RBAC</span>
+                            <span class="proj-tag">Recharts</span>
+                        </div>
+                        <hr class="proj-divider">
+                        <ul class="proj-features">
+                            <li>AI waste classification from uploaded images using TensorFlow.js and Teachable Machine</li>
+                            <li>GPS-based reporting with automated workflow routing across citizen, worker, and admin roles</li>
+                            <li>Interactive analytics dashboard built with Recharts showing real-time regional waste trends</li>
+                        </ul>
+                        <div class="proj-btns">
+                            <a href="https://waste-stream-auditor.vercel.app" target="_blank" class="btn-proj btn-proj-primary">Live Demo</a>
+                            <a href="https://github.com/miloshsony/waste-stream-auditor" target="_blank" class="btn-proj btn-proj-outline">GitHub</a>
+                        </div>
+                    </div>                    <!-- Project 3 -->
+                    <div class="new-project-card">
+                        <div class="proj-card-top">
+                            <span class="proj-num">03 / 03</span>
+                            <span class="proj-badge badge-green">Published</span>
+                        </div>
+                        <h3 class="proj-title">College Facilities Management</h3>
+                        <p class="proj-desc">Booking and management system for college facilities including labs, auditoriums, and sports courts with admin approval.</p>
+                        <div class="proj-tags">
+                            <span class="proj-tag tag-blue">Node.js</span>
+                            <span class="proj-tag tag-blue">Express.js</span>
+                            <span class="proj-tag">MongoDB</span>
+                            <span class="proj-tag">EJS</span>
+                            <span class="proj-tag">Session Auth</span>
+                        </div>
+                        <hr class="proj-divider">
+                        <ul class="proj-features">
+                            <li>Role-separated dashboards for students and admins</li>
+                            <li>Prevents double-booking with approval workflow</li>
+                            <li>Research published — <a href="assets/EDUNEXUS_COLLEGE_FACILITY_BOOKING_PLATFORM.pdf" target="_blank" class="proj-feat-link">IJOEST Vol.10, Feb 2026</a></li>
+                        </ul>
+                        <div class="proj-btns">
+                            <a href="https://college-facilities.onrender.com" target="_blank" class="btn-proj btn-proj-primary">Live Demo</a>
+                            <a href="https://github.com/miloshsony/college-facilities" target="_blank" class="btn-proj btn-proj-outline">GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -158,31 +184,35 @@
         </section>
         <!-- Achievements Section -->
         <section id="achievements" class="achievements card-section">
-            <div class="card">
+            <div class="card achievements-container">
                 <h2>Achievements</h2>
-                <ul class="achievements-list">
-                    <li>Research Publication: Authored EduNexus — College Facility Booking Platform, published in International Journal of Engineering Science Technologies (ISSN: 2456-8651), Volume 10, Number 1, February 2026.</li>
-                    <li>Team Leader, Smart India Hackathon 2024 (MIC & AICTE): Led a 6-member team across 4 development sprints, delivering a fully functional prototype within a 36-hour competitive window.</li>
-                    <li>Student Leader, NSS 2021: Coordinated community engagement for 50+ volunteers.</li>
-                </ul>
-            </div>
-        </section>
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="testimonials card-section">
-            <div class="card">
-                <h2>Testimonials</h2>
-                <div class="testimonials-grid animated-cards">
-                    <div class="testimonial-card">
-                        <p>“Milosh is a highly skilled developer who delivers on time and exceeds expectations. His attention to security and detail is top-notch.”</p>
-                        <div class="testimonial-author">— Project Manager, Srishti Innovative</div>
+                <div class="new-achievements-list">
+                    <!-- Achievement 1 -->
+                    <div class="new-achievement-card">
+                        <div class="ach-label">Research Publication</div>
+                        <h3 class="ach-title">EduNexus — College Facility Booking Platform</h3>
+                        <p class="ach-desc">Published in the International Journal of Engineering Science Technologies (ISSN: 2456-8651), Volume 10, Number 1, February 2026.</p>
+                        <a href="assets/EDUNEXUS_COLLEGE_FACILITY_BOOKING_PLATFORM.pdf" target="_blank" class="ach-link">
+                            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ach-link-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            <span>Read Publication [PDF]</span>
+                        </a>
                     </div>
-                    <div class="testimonial-card">
-                        <p>“A true team leader and problem solver. The Smart India Hackathon project was a huge success under his guidance.”</p>
-                        <div class="testimonial-author">— SIH 2024 Team Member</div>
+                    <!-- Achievement 2 -->
+                    <div class="new-achievement-card">
+                        <div class="ach-label">Hackathon Leadership</div>
+                        <h3 class="ach-title">Team Leader — Smart India Hackathon 2024 (MIC & AICTE)</h3>
+                        <p class="ach-desc">Led a 6-member team across 4 development sprints, delivering a fully functional prototype within a 36-hour competitive window.</p>
+                    </div>
+                    <!-- Achievement 3 -->
+                    <div class="new-achievement-card">
+                        <div class="ach-label">Community Leadership</div>
+                        <h3 class="ach-title">Student Leader — NSS 2021</h3>
+                        <p class="ach-desc">Coordinated community engagement activities for 50+ volunteers.</p>
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- Education Section -->
         <section id="education" class="education card-section">
             <div class="card">
@@ -220,41 +250,56 @@
         </section>
         <!-- Contact Section -->
         <section id="contact" class="contact card-section">
-            <div class="card">
+            <div class="card contact-container">
                 <h2>Contact</h2>
                 <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-item"><span>📧</span> <a href="mailto:miloshsony2003@gmail.com">miloshsony2003@gmail.com</a></div>
-                        <div class="contact-item"><span>📱</span> <a href="tel:+917306333244">+91-73063-33244</a></div>
-                        <div class="contact-item"><span>📍</span> Kottayam, Kerala, India</div>
-                        <div class="contact-item"><span>💼</span> <a href="https://linkedin.com/in/miloshsony" target="_blank">LinkedIn</a></div>
-                        <div class="contact-item"><span>🐙</span> <a href="https://github.com/miloshsony" target="_blank">GitHub</a></div>
-                        <div class="contact-item"><span>🌐</span> <a href="https://miloshsony.vercel.app" target="_blank">Portfolio</a></div>
-                        <div class="contact-item"><span>💾</span> <a href="./assets/MiloshSony.vcf" download>Download vCard</a></div>
+                    <div class="new-contact-info">
+                        <div class="contact-detail-item">
+                            <svg class="contact-svg-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <a href="mailto:miloshsony2003@gmail.com" class="detail-link">miloshsony2003@gmail.com</a>
+                        </div>
+                        <div class="contact-detail-item">
+                            <svg class="contact-svg-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <a href="tel:+917306333244" class="detail-link">+91-73063-33244</a>
+                        </div>
+                        <div class="contact-detail-item">
+                            <svg class="contact-svg-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            <span class="detail-text">Kottayam, Kerala, India</span>
+                        </div>
+                        
+                        <div class="contact-social-buttons">
+                            <a href="https://linkedin.com/in/miloshsony" target="_blank" class="btn-social-outline">
+                                <svg class="contact-svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="https://github.com/miloshsony" target="_blank" class="btn-social-outline">
+                                <svg class="contact-svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
                     </div>
                     <form class="contact-form" id="contact-form" novalidate>
+                        <input type="hidden" name="access_key" value="fdd8c1fe-e6ee-4dcc-9f59-71b36f7d52c1">
                         <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required>
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input type="text" id="name" name="name" placeholder="Your full name" required>
                             <span class="error-message" id="name-error"></span>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
                             <span class="error-message" id="email-error"></span>
                         </div>
                         <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
                             <span class="error-message" id="message-error"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary btn-submit-full">Send Message</button>
                     </form>
                 </div>
             </div>
         </section>
-        <!-- Floating Action Button -->
-        <button id="fab-contact" class="fab" aria-label="Quick Contact">✉️</button>
         <!-- Back to Top Button -->
         <button id="back-to-top" class="btn btn-primary" aria-label="Back to top">↑</button>
         <!-- Footer -->
@@ -272,15 +317,25 @@
                         <a href="#projects" class="footer-link">Projects</a>
                         <a href="#achievements" class="footer-link">Achievements</a>
                         <a href="#contact" class="footer-link">Contact</a>
-                        <a href="https://linkedin.com/in/miloshsony" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="LinkedIn">🔗</a>
-                        <a href="https://github.com/miloshsony" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="GitHub">🐙</a>
-                        <a href="mailto:miloshsony2003@gmail.com" class="footer-social" aria-label="Email">✉️</a>
+                        <span class="footer-social-wrapper">
+                            <a href="https://linkedin.com/in/miloshsony" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="LinkedIn">LinkedIn</a>
+                            <a href="https://github.com/miloshsony" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="GitHub">GitHub</a>
+                            <a href="mailto:miloshsony2003@gmail.com" class="footer-social-btn" aria-label="Email">Email</a>
+                        </span>
                     </div>
                 </div>
             </div>
         </footer>
     </main>
-    <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
+    <script src="js/main.js?v=1.0.6"></script>
+    <script src="js/animations.js?v=1.0.6"></script>
 </body>
 </html>

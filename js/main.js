@@ -1,14 +1,11 @@
 // Main JavaScript functionality
 class PortfolioApp {
     constructor() {
-        this.navbar = document.getElementById('navbar');
-        this.navToggle = document.getElementById('nav-toggle');
-        this.navMenu = document.getElementById('nav-menu');
+        this.navbar = document.querySelector('.screenshot-nav');
         this.contactForm = document.getElementById('contact-form');
         this.toast = document.getElementById('toast');
         this.modals = document.querySelectorAll('.modal');
         this.sidebarNav = document.querySelectorAll('.sidebar-nav .nav-link');
-        this.fab = document.getElementById('fab-contact');
         
         this.init();
     }
@@ -22,54 +19,19 @@ class PortfolioApp {
         this.addEventListeners();
         this.setupBackToTop();
         this.setupSidebarNav();
-        this.setupFab();
-        // Dark mode initial state
-        const theme = localStorage.getItem('theme');
-        if (theme === 'dark') {
-            document.body.classList.add('dark-mode');
-            document.getElementById('dark-mode-toggle').textContent = '☀️';
-        }
-        document.getElementById('dark-mode-toggle').addEventListener('click', () => this.toggleTheme());
     }
     
     // Navigation Setup
     setupNavigation() {
-        // Mobile menu toggle
-        this.navToggle.addEventListener('click', () => {
-            this.navMenu.classList.toggle('active');
-            this.navToggle.classList.toggle('active');
-            
-            const expanded = this.navToggle.getAttribute('aria-expanded') === 'true';
-            this.navToggle.setAttribute('aria-expanded', !expanded);
-        });
-        
-        // Close mobile menu when clicking nav links
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                this.navMenu.classList.remove('active');
-                this.navToggle.classList.remove('active');
-                this.navToggle.setAttribute('aria-expanded', 'false');
-            });
-        });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!this.navbar.contains(e.target)) {
-                this.navMenu.classList.remove('active');
-                this.navToggle.classList.remove('active');
-                this.navToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-        
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                this.navbar.classList.add('scrolled');
-            } else {
-                this.navbar.classList.remove('scrolled');
+            if (this.navbar) {
+                if (window.scrollY > 50) {
+                    this.navbar.classList.add('scrolled');
+                } else {
+                    this.navbar.classList.remove('scrolled');
+                }
             }
-            
             this.updateActiveNavLink();
         });
     }
@@ -184,24 +146,45 @@ class PortfolioApp {
         const messageValid = this.validateField(document.getElementById('message'));
         
         if (nameValid && emailValid && messageValid) {
-            // Log to console (as requested)
-            console.log('Contact Form Submission:', {
-                name,
-                email,
-                message,
-                timestamp: new Date().toISOString()
+            const submitBtn = this.contactForm.querySelector('.btn-submit-full');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            // Submit directly to Web3Forms using AJAX
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.success) {
+                    // Log to console
+                    console.log('Contact Form Sent Successfully:', { name, email, message });
+                    
+                    // Show success toast
+                    this.showToast('Thank you! Your message has been sent successfully.');
+                    
+                    // Reset form
+                    this.contactForm.reset();
+                } else {
+                    const errorMsg = data && data.message ? data.message : 'Oops! There was a problem submitting your form.';
+                    this.showToast(errorMsg, 'error');
+                }
+            })
+            .catch(error => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                this.showToast('Oops! There was a network problem. Please try again.', 'error');
+                console.error('Submission error:', error);
             });
-            
-            // Show success toast
-            this.showToast('Thank you! Your message has been sent successfully.');
-            
-            // Open mailto as fallback
-            const subject = encodeURIComponent('Portfolio Inquiry');
-            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-            window.location.href = `mailto:miloshs.mca2426@saintgits.org?subject=${subject}&body=${body}`;
-            
-            // Reset form
-            this.contactForm.reset();
         } else {
             this.showToast('Please fix the errors above and try again.', 'error');
         }
@@ -379,7 +362,10 @@ class PortfolioApp {
     addEventListeners() {
         // Page load animations
         window.addEventListener('load', () => {
-            document.querySelector('.hero .fade-in').classList.add('animate');
+            const heroFade = document.querySelector('.screenshot-hero .fade-in') || document.querySelector('.hero .fade-in');
+            if (heroFade) {
+                heroFade.classList.add('animate');
+            }
         });
         
         // Keyboard navigation
@@ -446,14 +432,6 @@ class PortfolioApp {
                 link.classList.add('active');
             });
         });
-    }
-    
-    setupFab() {
-        if (this.fab) {
-            this.fab.addEventListener('click', () => {
-                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-            });
-        }
     }
 }
 
