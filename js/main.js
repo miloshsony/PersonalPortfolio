@@ -7,6 +7,8 @@ class PortfolioApp {
         this.contactForm = document.getElementById('contact-form');
         this.toast = document.getElementById('toast');
         this.modals = document.querySelectorAll('.modal');
+        this.sidebarNav = document.querySelectorAll('.sidebar-nav .nav-link');
+        this.fab = document.getElementById('fab-contact');
         
         this.init();
     }
@@ -18,6 +20,16 @@ class PortfolioApp {
         this.setupScrollEffects();
         this.setupSmoothScroll();
         this.addEventListeners();
+        this.setupBackToTop();
+        this.setupSidebarNav();
+        this.setupFab();
+        // Dark mode initial state
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('dark-mode-toggle').textContent = '☀️';
+        }
+        document.getElementById('dark-mode-toggle').addEventListener('click', () => this.toggleTheme());
     }
     
     // Navigation Setup
@@ -309,6 +321,15 @@ class PortfolioApp {
         cards.forEach((card, index) => {
             card.classList.add('scale-in', `stagger-${(index % 4) + 1}`);
         });
+        
+        // Animate cards in .animated-cards
+        const animatedCards = document.querySelectorAll('.animated-cards > *');
+        animatedCards.forEach((card, i) => {
+            setTimeout(() => {
+                card.style.opacity = 1;
+                card.style.transform = 'none';
+            }, 150 + i * 120);
+        });
     }
     
     // Smooth Scroll
@@ -395,10 +416,44 @@ class PortfolioApp {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
     
-    // Theme management (if needed in future)
+    // Theme management (now implemented)
     toggleTheme() {
-        // Reserved for future dark mode implementation
-        console.log('Theme toggle - reserved for future implementation');
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        document.getElementById('dark-mode-toggle').textContent = isDark ? '☀️' : '🌙';
+    }
+
+    // Back to Top Button
+    setupBackToTop() {
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    setupSidebarNav() {
+        this.sidebarNav.forEach(link => {
+            link.addEventListener('click', (e) => {
+                this.sidebarNav.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    }
+    
+    setupFab() {
+        if (this.fab) {
+            this.fab.addEventListener('click', () => {
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
     }
 }
 
